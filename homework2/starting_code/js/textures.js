@@ -24,7 +24,7 @@ function refreshTextures() {
      **/
 
     // ****** here is the cloud part ******
-    // get the html elements by their ids
+    // get the Html elements by their ids
     var cloud_perlin = document.getElementById("cloud_perlin");
     var cloud_color_r = document.getElementById("cloud_color_r");
     var cloud_color_g = document.getElementById("cloud_color_g");
@@ -34,8 +34,8 @@ function refreshTextures() {
     // set the attribute values
     cloud_perlin.setAttribute("baseFrequency", cloudFrequency); // cloud frequency
     cloud_color_r.setAttribute("exponent", cloudAmount); // cloud amount
-    // cloud_color_g.setAttribute("exponent", cloudAmount);
-    // cloud_color_b.setAttribute("exponent", cloudAmount);
+    cloud_color_g.setAttribute("exponent", cloudAmount);
+    cloud_color_b.setAttribute("exponent", cloudAmount);
     var cloud_matrix = new Array(); // cloud color
     for(var i=0; i<3; i++){
         cloud_matrix[i] = new Array();

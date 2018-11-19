@@ -74,11 +74,11 @@
                             <feTurbulence type="fractalNoise" numOctaves="3" id="grass_perlin" 
                                 result="grass_noise" />
                             <!-- the feColorMatrix filter -->
-                            <feColorMatrix type="matrix" id="grass_color_matrix" result="grass_pic" />
+                            <feColorMatrix type="matrix" id="grass_color_matrix" />
                             <!-- the feOffset filter -->
-                            <feOffset dx="10" />
+                            <feOffset dy="10" result="grass_pic" />
                             <!-- the feDisplacementMap filter -->
-                            <feDisplacementMap in="grass_pic" in2="grass_noise" scale="35" />
+                            <feDisplacementMap in="grass_pic" in2="grass_noise" scale="30" />
                         </filter>
 
                     </defs>

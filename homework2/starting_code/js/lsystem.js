@@ -96,9 +96,9 @@ function runLSystem(start, rules, iterations) {
             // get the depth of the input symbol
             var res = getNumberFromString(string, j + 1);
             var isExist = false; // used to record whether the depth exists or not
-            if(isNaN(res.number) == false){
+            if(!isNaN(res.number)){
                 isExist = true;
-              //  j = res.next - 1;
+                j = res.next - 1;
             }
 
             // Assume the replacement is the letter/symbol itself
@@ -135,6 +135,11 @@ function runLSystem(start, rules, iterations) {
                 }
                 replacement = cur_str;
             }
+            // if current symbol does not has a replacement rule and has a depth, 
+            // we should put the depth in the result string
+            else if(isExist){
+                replacement += res.number;
+            }
 
             // Add the replacement at the end of the result string
             result = result + replacement;
@@ -159,7 +164,8 @@ function drawLSystem(turtle, string, length, angle, width,
     var heading_stack = [];
 
     for (var i = 0; i < string.length; i++) {
-        // The letter/symbol to be handled
+
+        // The letter or symbol to be handled
         var symbol = string[i];
 
         /**
@@ -167,9 +173,12 @@ function drawLSystem(turtle, string, length, angle, width,
          *       if there is one, next to the current symbol
          **/
 
+        // used to represent current length and current width
         var cur_len = length;
         var cur_width = width;
 
+        // check if there has a depth or not
+        // if there has a depth, then compute current length and current depth
         if("ABCDEF".indexOf(symbol) >= 0 || "GHIJKL".indexOf(symbol) >= 0){
             var temp = getNumberFromString(string, i + 1);
             // if the depth exists, then change the length and width
@@ -180,9 +189,6 @@ function drawLSystem(turtle, string, length, angle, width,
             }
         }
 
-        console.log("cur len "+cur_len);
-        console.log("cur width" + cur_width);
-
         // Move and draw forward
         if ("ABCDEF".indexOf(symbol) >= 0) {
             /**
@@ -190,9 +196,9 @@ function drawLSystem(turtle, string, length, angle, width,
              *       depending on the L-system settings
              **/
 
-            var cur_color = "black";
+            var cur_color = "black"; // default color
             if(colors.hasOwnProperty(symbol))
-                cur_color = colors[symbol];
+                cur_color = colors[symbol]; // assigned color
 
             turtle.color(cur_color);
             turtle.width(cur_width);
